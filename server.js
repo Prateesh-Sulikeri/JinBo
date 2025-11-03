@@ -642,10 +642,10 @@ app.listen(PORT, async () => {
   console.log('\n╔════════════════════════════════╗');
   console.log(`║  🤖 ${KB.bot.name} - Complete!      ║`);
   console.log('╚════════════════════════════════╝\n');
-  console.log(`Server: http://localhost:${PORT}`);
+  console.log(`🌍 Server running on PORT: ${PORT}`);
   console.log(`User: ${KB.personal.name}\n`);
-  
+
   await initData();
-  
+
   console.log('✅ Ready with comprehensive FAQs!\n');
 });
