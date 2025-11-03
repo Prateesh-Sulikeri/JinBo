@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 let KB = {};
 try {
   KB = JSON.parse(fs.readFileSync(path.join(__dirname, 'knowledge-base.json'), 'utf8'));
@@ -638,14 +641,19 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Serve frontend for root and unknown routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.listen(PORT, async () => {
   console.log('\n╔════════════════════════════════╗');
   console.log(`║  🤖 ${KB.bot.name} - Complete!      ║`);
   console.log('╚════════════════════════════════╝\n');
-  console.log(`🌍 Server running on PORT: ${PORT}`);
+  console.log(`Server: http://localhost:${PORT}`);
   console.log(`User: ${KB.personal.name}\n`);
-
+  
   await initData();
-
+  
   console.log('✅ Ready with comprehensive FAQs!\n');
 });
