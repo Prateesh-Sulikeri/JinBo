@@ -63,7 +63,7 @@
     "github": "Prateesh-Sulikeri",
     "leetcode": "sulikeriprateesh7",
     "linkedin": "prateesh-sulikeri",
-    "medium": "@jinxxedcodes",
+    "medium": "@yourmediumusername",
     "portfolio": "https://prateesh-sulikeri-portfolio.vercel.app/",
     "contact_form": "https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
     "resume": "https://github.com/Prateesh-Sulikeri/Portfolio2025/blob/Master/public/Prateesh_Sulikeri_Resume.pdf",
@@ -254,11 +254,11 @@
     ],
     
     "default": [
-      "I can help you learn about:\n• Prateesh's tech stack and skills\n• His projects and experience\n• GitHub repositories\n• LeetCode stats\n• How to contact him\n• Job opportunities\n\nWhat interests you?",
-      "I'm here to answer questions about:\n- Prateesh's background and skills\n- Projects and work\n- Tech stack and experience\n- Contact information\n- Career opportunities\n\nWhat would you like to know?",
-      "Ask me about:\n✓ Skills and technologies\n✓ Projects and GitHub\n✓ Work experience\n✓ LeetCode progress\n✓ How to connect\n✓ Available opportunities\n\nWhat's on your mind?"
+      "Hmm, I'm not quite sure how to answer that specific question 🤔. But I'd love to help you with:\n\n• Prateesh's tech stack and skills\n• His projects and experience\n• GitHub repositories and code\n• LeetCode problem-solving stats\n• How to contact or collaborate\n• Job opportunities and availability\n\nWhat would you like to know?",
+      "I tried to understand your question, but I'm not confident I can give you the right answer 😅. Here's what I'm great at:\n\n- Background and experience\n- Technical skills and projects\n- GitHub and LeetCode stats\n- Career opportunities\n- Contact information\n\nTry asking about any of these!",
+      "I'm having trouble finding the perfect answer for that one 🤷. Let me help you with something I know well:\n\n✓ Tech stack and programming skills\n✓ Portfolio projects\n✓ Work experience and background\n✓ How to get in touch\n✓ Job availability\n\nWhat interests you most?"
     ],
     
-    "fallback": "I'm sorry but I couldn't help you with that 😕. You can contact Prateesh directly at: https://prateesh-sulikeri-portfolio.vercel.app/contact-form"
+    "fallback": "I searched through what I know, but couldn't find a good answer to that 😕. For questions outside my knowledge, you can reach Prateesh directly:\n\n📝 Contact Form: https://prateesh-sulikeri-portfolio.vercel.app/contact-form\n📧 Email: prateesh.sulikeri@outlook.com\n💼 LinkedIn: https://linkedin.com/in/prateesh-sulikeri\n\nHe'll be happy to help!"
   }
 }

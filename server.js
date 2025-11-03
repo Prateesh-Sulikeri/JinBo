@@ -570,6 +570,7 @@ function generateResponse(intent) {
       break;
       
     default:
+      // Show we tried but couldn't find an answer
       response = KB.responses.fallback;
   }
   
@@ -593,6 +594,11 @@ app.post('/api/chat', async (req, res) => {
     
     const intent = classifyIntent(message);
     console.log(`🎯 Intent: ${intent}`);
+    
+    // Log unhandled queries for improvement
+    if (intent === 'default') {
+      console.log(`⚠️  Unmatched query: "${message}"`);
+    }
     
     const response = generateResponse(intent, message);
     
