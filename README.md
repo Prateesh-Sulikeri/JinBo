@@ -31,4 +31,5 @@ npm install
 npm start
 ```
 
-Visit: 
+Visit live version at: 
+https://jinbo.onrender.com/ 
