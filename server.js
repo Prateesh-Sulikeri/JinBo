@@ -1,4 +1,4 @@
-// server.js - Complete Working Version with All FAQ Responses
+// server.js - Complete Working Version with All FAQ Responses (Hybrid Intent Engine)
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -25,11 +25,12 @@ try {
   process.exit(1);
 }
 
-let cache = { github: null, leetcode: null, medium: null, lastFetch: null };
+let cache = { github: null, leetcode: null, medium: null, linkedin: null, lastFetch: null };
 
-// ===== COMPREHENSIVE INTENT PATTERNS =====
-// ===== IMPROVED INTENT PATTERNS WITH PRIORITY =====
-// IMPORTANT: Order matters! More specific patterns should come FIRST
+/* ============================================
+   INTENT DEFINITIONS (regex fallback layer)
+   NOTE: Order in INTENT_ORDER controls priority.
+   ============================================ */
 
 const INTENTS = {
   greeting: [/^(hi|hello|hey|hola|namaste|greetings|good morning|good evening|sup|yo|wassup)\b/i],
@@ -43,36 +44,56 @@ const INTENTS = {
     /\bhow (was|is) this (chatbot |bot )?built/i
   ],
 
-  // EDUCATION PATTERNS - MOVED UP FOR PRIORITY
+  // Platform/profile intents must win before education
+  github: [
+    /\b(github|git hub|repositories|repos?)\b/i,
+    /\b(show|what|tell) .* (github|code|repositories?)\b/i,
+    /github(?:\.com| profile| account| username| repo| repos?| stats?)/i
+  ],
+
+  leetcode: [
+    /\b(leetcode|leet ?code|coding problems?|dsa|algorithms?)\b/i,
+    /(?:leetcode|leet ?code)(?: profile| account| stats?| problems?| username)?/i,
+    /\bproblems? solved\b/i
+  ],
+
+  blogs: [
+    /\b(blog|medium|article|writing|post)s?\b/i,
+    /\b(does he |do you )?write\b/i,
+    /\blatest (blog|article|post)\b/i,
+    /(?:medium|blog)(?: profile| posts?| articles?| account)?/i
+  ],
+
+  linkedin: [
+    /\blinkedin\b/i,
+    /(?:linkedin|linkedin\.com)(?: profile| connect| network| account)?/i,
+    /\bconnect (on )?linkedin\b/i
+  ],
+
+  // EDUCATION — guarded to avoid hijacking platform "profile" queries
   education: [
-    // 🔹 Direct references to Prateesh’s education
-    /\b(prateesh|prateesh['’]s) (education|educational|qualification(s)?|degree|academic|academic background|stud(y|ies))\b/i,
+    // Direct references to education, not followed by platform terms
+    /\b(prateesh|prateesh['’]s) (education|educational|qualification(s)?|degree|academic|academic background|stud(y|ies))\b(?!.*(github|linkedin|leetcode|medium))/i,
 
-    // 🔹 Questions explicitly mentioning Prateesh or pronouns
-    /\b(what|tell me|share|show|give|describe|say|talk about) .* (prateesh|he|he['’]s|his|you|your) .* (education(al)?( qualification(s)?)?|qualification(s)?|degree(s)?|study|studies|college|school|academic( background)?|major|course|field|graduation|alma mater)\b/i,
+    // Questions with education words
+    /\b(what|tell me|share|show|give|describe|say|talk about) .* (prateesh|he|he['’]s|his|you|your) .* (education(al)?( qualification(s)?)?|qualification(s)?|degree(s)?|study|studies|college|school|academic( background)?|major|course|field|graduation|alma mater)\b(?!.*(github|linkedin|leetcode|medium))/i,
 
-    // 🔹 General questions about educational background
-    /\b(education|educational background|qualification(s)?|academic background|academic record|academic history|stud(y|ies)|college|school|degree(s)?|course|field of study|major|alma mater)\b/i,
+    // General education background
+    /\b(education|educational background|qualification(s)?|academic background|academic record|academic history|stud(y|ies)|college|school|degree(s)?|course|field of study|major|alma mater)\b(?!.*(github|linkedin|leetcode|medium))/i,
 
-    // 🔹 “Where did ... study / graduate / go to college” type
-    /\bwhere (did|do|does|has) (you|he|prateesh) (study|go to (college|school)|graduate|complete (his|your)? (degree|education))\b/i,
+    // Where did he study?
+    /\bwhere (did|do|does|has) (you|he|prateesh) (study|go to (college|school)|graduate|complete (his|your)? (degree|education))\b(?!.*(github|linkedin|leetcode|medium))/i,
 
-    // 🔹 “What / Which / When” + study/degree questions
-    /\b(what|which|when) .* (degree|qualification(s)?|education|course|field|major|college|school|university)\b/i,
-
-    // 🔹 “Tell me about ... education”
-    /\b(tell me|show|share|give|say|talk) (me )?(about )?(his|your|the|prateesh['’]s)? (education|college|school|stud(y|ies)|academic background|qualifications?)\b/i,
-
-    // 🔹 “Background / History / Record” type
+    // “Background / History / Record / Profile” — but exclude platform profile
     /\b(his|your|the)? ?(educational|academic)? ?(background|history|record|profile)\b(?!.*(github|linkedin|leetcode|medium))/i,
 
-    // 🔹 “Graduation / course / study / major / field” questions
+    // Graduation / course / major
     /\b(did|have|has|was|were|is|are|what|where|which) .* (graduate|graduation|course|major|field of study|specialization|subject|stream)\b/i,
 
-    // 🔹 “Highest / current / level of education” phrasing
+    // Highest/current level
     /\b(highest|current|level of) (education|qualification|degree|study|academic background)\b/i,
 
-    // 🔹 Short & informal phrasing
+    // Short variants
     /\b(study|degree|education|college|school|graduation|qualification)\?$/i
   ],
 
@@ -87,7 +108,7 @@ const INTENTS = {
 
   degree: [
     /\bprateesh'?s? degree\b/i,
-    /\b(what |which )?degree (does |did)?.*have\b/i,
+    /\b(what |which )?degree (does |did )?.*have\b/i,
     /\b(what |which )?degree\b/i,
     /\bb\.?e\.?\b/i,
     /\bbachelor\b/i,
@@ -109,7 +130,6 @@ const INTENTS = {
     /\bacademic (performance|record)\b/i
   ],
 
-  // ABOUT_CREATOR - Now less greedy, won't catch education queries
   about_creator: [
     /\b(who|what|tell me about|introduce) (is )?prateesh(?! .*(education|qualification|degree|college|school|study))\b/i,
     /\babout prateesh(?! .*(education|qualification|degree))\b/i,
@@ -137,31 +157,6 @@ const INTENTS = {
     /\b(show|tell|what|list|see) .*(projects?|portfolio|work)\b/i,
     /\blatest projects?\b/i,
     /\bwhat (did|has) (he|prateesh|you) (built?|created?|made?)\b/i
-  ],
-
-  github: [
-    /\b(github|git hub|repositories|repos?)\b/i,
-    /\b(show|what|tell) .* (github|code|repositories?)\b/i,
-    /github(?:\.com| profile| account| username| repo| repos?| stats?)/i
-  ],
-
-  leetcode: [
-    /\b(leetcode|leet code|coding problems?|dsa|algorithms?)\b/i,
-    /(?:leetcode|leet code)(?: profile| account| stats?| problems?| username)?/i,
-    /\bproblems? solved\b/i
-  ],
-
-  blogs: [
-    /\b(blog|medium|article|writing|post)s?\b/i,
-    /\b(does he |do you )?write\b/i,
-    /\blatest (blog|article|post)\b/i,
-    /(?:medium|blog)(?: profile| posts?| articles?| account)?/i
-  ],
-
-  linkedin: [
-    /\blinkedin\b/i,
-    /(?:linkedin|linkedin\.com)(?: profile| connect| network| account)?/i,
-    /\bconnect (on )?linkedin\b/i
   ],
 
   contact: [
@@ -276,6 +271,22 @@ const INTENTS = {
   ]
 };
 
+// Explicit priority: platform/profile before education
+const INTENT_ORDER = [
+  'github', 'leetcode', 'linkedin', 'blogs',
+  'greeting', 'about_bot',
+  'education', 'college', 'degree', 'schooling', 'cgpa',
+  'about_creator', 'tech_stack', 'skills', 'projects',
+  'contact', 'job_seeking', 'resume', 'location', 'portfolio_tech',
+  'source_code', 'favorite_frameworks', 'collaboration',
+  'learning_first', 'build_portfolio', 'resources', 'mentoring',
+  'freelance', 'experience', 'pricing', 'why_developer',
+  'learning_journey', 'open_source', 'personal_info', 'inappropriate'
+];
+
+/* ============================================
+   Search index for fuzzy KB (unchanged behavior)
+   ============================================ */
 function buildSearchIndex() {
   const searchableData = [];
 
@@ -315,7 +326,7 @@ function buildSearchIndex() {
 
   return new Fuse(searchableData, {
     keys: ['keywords', 'content'],
-    threshold: 0.4, // 0 = perfect match, 1 = match anything
+    threshold: 0.4,
     includeScore: true,
     ignoreLocation: true,
     minMatchCharLength: 3
@@ -324,18 +335,11 @@ function buildSearchIndex() {
 
 const searchIndex = buildSearchIndex();
 
-// ===== FUZZY SEARCH KB =====
 function fuzzySearchKB(query) {
   const results = searchIndex.search(query);
+  if (results.length === 0) return null;
 
-  if (results.length === 0) {
-    return null;
-  }
-
-  // Get best match
   const best = results[0];
-
-  // Only return if confidence is reasonable
   if (best.score < 0.6) {
     return {
       key: best.item.key,
@@ -344,83 +348,101 @@ function fuzzySearchKB(query) {
       type: best.item.type
     };
   }
-
   return null;
 }
+
 function validateFuzzyResult(query, result) {
-  // Extract key terms from query
-  const queryTerms = query.toLowerCase()
-    .split(/\s+/)
-    .filter(word => word.length > 3);
-
-  // Check if result content contains query terms
+  const queryTerms = query.toLowerCase().split(/\s+/).filter(w => w.length > 3);
   const resultText = result.content.toLowerCase();
-  const matchedTerms = queryTerms.filter(term =>
-    resultText.includes(term)
-  );
-
-  // Validation threshold: at least 40% of query terms must appear
-  const validationScore = matchedTerms.length / queryTerms.length;
-
+  const matchedTerms = queryTerms.filter(term => resultText.includes(term));
+  const validationScore = matchedTerms.length / (queryTerms.length || 1);
   return {
     isValid: validationScore >= 0.4 || result.confidence >= 70,
     validationScore: Math.round(validationScore * 100),
-    matchedTerms: matchedTerms
+    matchedTerms
   };
 }
 
+/* ============================================
+   Normalization + Hybrid Intent Engine
+   ============================================ */
 function normalizeMessage(message) {
   return message
     .trim()
     .toLowerCase()
-    // Normalize apostrophes
     .replace(/['`´]/g, "'")
-    // Handle contractions
     .replace(/(\w+)'(s|re|ve|ll|d|m|t)\b/g, '$1 $2')
-    // Preserve meaningful punctuation, remove noise
     .replace(/[^\w\s?!.'-]/g, ' ')
-    // Collapse multiple spaces
     .replace(/\s+/g, ' ')
     .trim();
 }
 
-// ===== CLASSIFY INTENT =====
-function classifyIntent(message) {
-  const normalized = normalizeMessage(message);
-  const original = message.trim();
+// lightweight weighted scoring
+const weightedKeywords = {
+  github: ['github', 'repo', 'repository', 'code', 'stars', 'commit', 'pull request', 'profile'],
+  leetcode: ['leetcode', 'leet code', 'dsa', 'problem', 'problems', 'coding', 'profile'],
+  linkedin: ['linkedin', 'connect', 'professional', 'network', 'profile'],
+  blogs: ['medium', 'blog', 'article', 'post', 'profile'],
+  education: ['education', 'college', 'degree', 'qualification', 'academic', 'study', 'school', 'profile']
+};
 
-  let detectedIntents = [];
+function scoreIntents(message) {
+  const text = normalizeMessage(message);
+  const scores = {};
+  const hasProfile = /\bprofile\b/i.test(text);
 
-  for (const [intent, patterns] of Object.entries(INTENTS)) {
-    for (const pattern of patterns) {
-      if (pattern.test(normalized) || pattern.test(original)) {
-        return intent;
-      }
+  for (const [intent, words] of Object.entries(weightedKeywords)) {
+    scores[intent] = words.reduce((acc, w) => acc + (text.includes(w) ? 1 : 0), 0);
+    // small bonus if user says "profile" with a platform
+    if (hasProfile && ['github','leetcode','linkedin','blogs'].includes(intent) && text.includes(intent)) {
+      scores[intent] += 1;
     }
   }
 
-  // 🧠 Context disambiguation logic:
-  if (detectedIntents.includes('github') && detectedIntents.includes('linkedin')) {
-    if (/github/i.test(normalized)) return 'github';
-    if (/linkedin/i.test(normalized)) return 'linkedin';
-  }
+  // pick max
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const [bestIntent, bestScore] = sorted[0] || ['default', 0];
 
-  if (detectedIntents.includes('education') && /profile/i.test(normalized)) {
-    if (/academic|education/i.test(normalized)) return 'education';
-  }
+  // require a minimal confidence
+  if (bestScore >= 2) return bestIntent;
+  return null;
+}
 
-  // 🧠 Context-based overrides for “profile” confusion
-  if (/profile/i.test(normalized)) {
-    if (/github/i.test(normalized)) return 'github';
-    if (/leetcode|leet ?code/i.test(normalized)) return 'leetcode';
-    if (/linkedin/i.test(normalized)) return 'linkedin';
-    if (/medium|blog/i.test(normalized)) return 'blogs';
+// explicit platform-profile override
+function platformProfileOverride(message) {
+  const t = normalizeMessage(message);
+  if (!/\bprofile\b/.test(t)) return null;
+  if (/\bgithub\b/.test(t)) return 'github';
+  if (/\bleet ?code\b/.test(t)) return 'leetcode';
+  if (/\blinkedin\b/.test(t)) return 'linkedin';
+  if (/\bmedium\b|\bblog\b/.test(t)) return 'blogs';
+  return null;
+}
+
+function classifyIntent(message) {
+  const normalized = normalizeMessage(message);
+
+  // 0) explicit override for "X profile"
+  const override = platformProfileOverride(normalized);
+  if (override) return override;
+
+  // 1) keyword scoring first (handles overlaps naturally)
+  const scored = scoreIntents(normalized);
+  if (scored) return scored;
+
+  // 2) ordered regex fallback
+  for (const intent of INTENT_ORDER) {
+    const patterns = INTENTS[intent];
+    if (!patterns) continue;
+    if (patterns.some(p => p.test(normalized))) return intent;
   }
 
   return 'default';
 }
 
-// ===== FETCH GITHUB =====
+/* ============================================
+   Data fetchers (unchanged)
+   ============================================ */
 async function fetchGitHub(username) {
   try {
     const [user, repos] = await Promise.all([
@@ -438,7 +460,7 @@ async function fetchGitHub(username) {
       .slice(0, 3)
       .map(([lang]) => lang);
 
-    const totalStars = repos.data.reduce((sum, r) => sum + r.stargazers_count, 0);
+    const totalStars = repos.data.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
 
     return {
       username: user.data.login,
@@ -460,7 +482,6 @@ async function fetchGitHub(username) {
   }
 }
 
-// ===== FETCH LEETCODE =====
 async function fetchLeetCode(username) {
   try {
     const query = `
@@ -476,7 +497,6 @@ async function fetchLeetCode(username) {
         }
       }
     `;
-
     const response = await axios.post('https://leetcode.com/graphql', {
       query,
       variables: { username }
@@ -484,17 +504,17 @@ async function fetchLeetCode(username) {
 
     if (response.data?.data?.matchedUser) {
       const user = response.data.data.matchedUser;
-      const stats = user.submitStatsGlobal.acSubmissionNum;
+      const stats = user.submitStatsGlobal.acSubmissionNum || [];
 
+      const pick = (lvl) => (stats.find(s => s.difficulty === lvl)?.count) || 0;
       return {
         username: user.username,
-        total: stats.find(s => s.difficulty === 'All')?.count || 0,
-        easy: stats.find(s => s.difficulty === 'Easy')?.count || 0,
-        medium: stats.find(s => s.difficulty === 'Medium')?.count || 0,
-        hard: stats.find(s => s.difficulty === 'Hard')?.count || 0
+        total: pick('All'),
+        easy: pick('Easy'),
+        medium: pick('Medium'),
+        hard: pick('Hard')
       };
     }
-
     return null;
   } catch (error) {
     console.error('LeetCode error:', error.message);
@@ -502,7 +522,6 @@ async function fetchLeetCode(username) {
   }
 }
 
-// ===== FETCH MEDIUM =====
 async function fetchMedium(username) {
   try {
     const response = await axios.get(
@@ -520,7 +539,6 @@ async function fetchMedium(username) {
         latest: response.data.items[0]
       };
     }
-
     return null;
   } catch (error) {
     console.error('Medium error:', error.message);
@@ -529,16 +547,10 @@ async function fetchMedium(username) {
 }
 
 async function fetchLinkedInActivity() {
-  // LinkedIn requires OAuth and app approval for their API
-  // Solution: Manually update data in knowledge-base.json
-  // This gives you full control without API complexity
-
   try {
     if (KB.social.linkedin_data) {
       return KB.social.linkedin_data;
     }
-
-    // Fallback to basic profile URL
     return {
       profileUrl: `https://linkedin.com/in/${KB.social.linkedin}`,
       latestPost: null,
@@ -554,7 +566,9 @@ async function fetchLinkedInActivity() {
   }
 }
 
-// ===== INITIALIZE DATA =====
+/* ============================================
+   Init data (unchanged)
+   ============================================ */
 async function initData() {
   console.log('🔄 Fetching data...');
 
@@ -577,7 +591,9 @@ async function initData() {
   console.log(`LinkedIn: ${cache.linkedin ? '✓' : '✗'}\n`);
 }
 
-// ===== RANDOM VARIATION SELECTOR =====
+/* ============================================
+   Helpers
+   ============================================ */
 function getRandomVariation(responses) {
   if (Array.isArray(responses)) {
     return responses[Math.floor(Math.random() * responses.length)];
@@ -585,10 +601,11 @@ function getRandomVariation(responses) {
   return responses;
 }
 
-// ===== GENERATE RESPONSE =====
-function generateResponse(intent) {
+/* ============================================
+   Response generator (kept intact, safer cgpa)
+   ============================================ */
+function generateResponse(intent, originalMessage) {
   let response = '';
-
   const getResp = (key) => getRandomVariation(KB.responses[key]);
 
   switch (intent) {
@@ -659,7 +676,7 @@ function generateResponse(intent) {
       break;
 
     case 'blogs':
-      if (cache.medium && cache.medium.posts.length > 0) {
+      if (cache.medium && cache.medium.posts && cache.medium.posts.length > 0) {
         response = `Latest blog posts:\n\n`;
         cache.medium.posts.forEach((post, i) => {
           response += `${i + 1}. ${post.title}\n   ${post.link}\n\n`;
@@ -777,14 +794,15 @@ function generateResponse(intent) {
       response = getResp('personal_info');
       break;
 
-    case 'inappropriate':
-      const msg = arguments[1] || '';
+    case 'inappropriate': {
+      const msg = originalMessage || '';
       if (/hack/i.test(msg)) response = getResp('inappropriate_hacking');
       else if (/homework/i.test(msg)) response = getResp('homework');
       else if (/date|marry/i.test(msg)) response = getResp('dating');
       else if (/api|password|bank/i.test(msg)) response = getResp('api_keys');
       else response = KB.responses.fallback;
       break;
+    }
 
     case 'education':
       response = getResp('education');
@@ -802,23 +820,24 @@ function generateResponse(intent) {
       response = getResp('schooling');
       break;
 
-    case 'cgpa':
-      const edu = KB.education || KB.personal.education || [];
-      const be = edu.find(e => e.level === "Bachelor of Engineering");
-      response = `Academic Performance:\n\n`;
-      if (be) {
-        response += `🎓 B.E Computer Science: ${be.cgpa} CGPA (2024)\n`;
-      }
-      if (edu[1]) {
-        response += `📚 12th Grade: ${edu[1].percentage}% (2020)\n`;
-      }
-      if (edu[2]) {
-        response += `📖 10th Grade: ${edu[2].percentage}% (2018)`;
-      }
-      if (!be) {
+    case 'cgpa': {
+      // Safe dynamic response
+      const edu = (KB.education && Array.isArray(KB.education)) ? KB.education : [];
+      const be = edu.find(e => e.level && /Bachelor of Engineering/i.test(e.level));
+      const pu = edu.find(e => /Pre-?University/i.test(e.level || '')) || edu[1];
+      const sslc = edu.find(e => /Secondary|SSLC|10th/i.test(e.level || '')) || edu[2];
+
+      if (!be && !pu && !sslc) {
         response = "Education data not found in knowledge base.";
+        break;
       }
+
+      response = `Academic Performance:\n\n`;
+      if (be) response += `🎓 B.E Computer Science: ${be.cgpa ?? 'N/A'} CGPA (${be.year ?? 'N/A'})\n`;
+      if (pu) response += `📚 12th Grade: ${pu.percentage ?? 'N/A'}% (${pu.year ?? 'N/A'})\n`;
+      if (sslc) response += `📖 10th Grade: ${sslc.percentage ?? 'N/A'}% (${sslc.year ?? 'N/A'})`;
       break;
+    }
 
     case 'default':
       response = getResp('default');
@@ -831,25 +850,9 @@ function generateResponse(intent) {
   return response;
 }
 
-const weightedKeywords = {
-  github: ['github', 'repo', 'repository', 'code', 'stars'],
-  linkedin: ['linkedin', 'connect', 'professional', 'profile'],
-  education: ['education', 'college', 'degree', 'qualification', 'profile']
-};
-
-function resolveIntentByWeight(message) {
-  const normalized = normalizeMessage(message);
-  let scores = {};
-
-  for (const [intent, words] of Object.entries(weightedKeywords)) {
-    scores[intent] = words.reduce((acc, w) => acc + (normalized.includes(w) ? 1 : 0), 0);
-  }
-
-  const best = Object.entries(scores).sort((a, b) => b[1] - a[1])[0];
-  return best && best[1] > 0 ? best[0] : 'default';
-}
-
-// ===== MAIN CHAT ENDPOINT =====
+/* ============================================
+   API endpoints
+   ============================================ */
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -865,8 +868,6 @@ app.post('/api/chat', async (req, res) => {
     }
 
     let intent = classifyIntent(message);
-    if (intent === 'default') intent = resolveIntentByWeight(message);
-
     console.log(`🎯 Intent: ${intent}`);
 
     let response;
@@ -874,23 +875,18 @@ app.post('/api/chat', async (req, res) => {
 
     if (intent === 'default') {
       console.log(`🔍 Attempting fuzzy search...`);
-
       const fuzzyResult = fuzzySearchKB(message);
 
       if (fuzzyResult) {
         const validation = validateFuzzyResult(message, fuzzyResult);
-
         console.log(`📊 Fuzzy: confidence=${fuzzyResult.confidence}%, validation=${validation.validationScore}%`);
 
         if (validation.isValid) {
-          if (fuzzyResult.type === 'response') {
-            response = fuzzyResult.content;
-          } else {
-            response = `Based on your question, here's what I found:\n\n${fuzzyResult.content}`;
-          }
+          response = (fuzzyResult.type === 'response')
+            ? fuzzyResult.content
+            : `Based on your question, here's what I found:\n\n${fuzzyResult.content}`;
 
           response += `\n\n⚠️ *Note: This answer was extracted from my knowledge base with ${fuzzyResult.confidence}% confidence and may not perfectly match your question. For more accurate info, please rephrase or contact Prateesh directly.*`;
-
           usedFuzzy = true;
         } else {
           console.log(`❌ Fuzzy validation failed`);
@@ -906,9 +902,9 @@ app.post('/api/chat', async (req, res) => {
 
     res.json({
       success: true,
-      response: response,
+      response,
       debug: {
-        intent: intent,
+        intent,
         usedFuzzySearch: usedFuzzy,
         method: usedFuzzy ? 'fuzzy' : 'intent'
       }
@@ -949,8 +945,7 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-;
-
+// Only start the server when run directly (keeps Jest clean)
 if (require.main === module) {
   app.listen(PORT, async () => {
     console.log('\n╔════════════════════════════════╗');
