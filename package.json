@@ -4,10 +4,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "predeploy": "node scripts/test-and-deploy.js",
-    "deploy": "npm run predeploy && npm run start",
-    "deploy:override": "node scripts/test-and-deploy.js --override && npm run start",
-    "build": "npm run predeploy"
+    "build": "node server.js"
   },
   "dependencies": {
     "axios": "^1.13.2",
