@@ -33,3 +33,12 @@ npm start
 
 Visit live version at: 
 https://jinbo.onrender.com/ 
+
+
+## TO Fix:
+Who is Prateesh
+How is Prateesh 
+why JinBo
+Who built you?
+How was this chatbot created?
+What frameworks is he good at?

@@ -9,36 +9,62 @@
     "timezone": "IST (Indian Standard Time)",
     "email": "prateesh.sulikeri@outlook.com",
     "phone": "+91 7892302330",
-    
     "tech_stack": {
-      "primary": ["C++", "Java (Spring Boot)", "AWS", "Python", "Shell Scripting"],
-      "web": ["Angular", "TypeScript", "Node.js", "React"],
-      "ml_ai": ["Pandas", "Numpy", "Matplotlib", "Keras", "TensorFlow", "PyTorch", "Langchain", "RAG", "GPT API"],
-      "databases": ["IBM DB2", "DynamoDB"],
-      "apis": ["REST", "GraphQL"]
+      "primary": [
+        "C++",
+        "Java (Spring Boot)",
+        "AWS",
+        "Python",
+        "Shell Scripting"
+      ],
+      "web": [
+        "Angular",
+        "TypeScript",
+        "Node.js",
+        "React"
+      ],
+      "ml_ai": [
+        "Pandas",
+        "Numpy",
+        "Matplotlib",
+        "Keras",
+        "TensorFlow",
+        "PyTorch",
+        "Langchain",
+        "RAG",
+        "GPT API"
+      ],
+      "databases": [
+        "IBM DB2",
+        "DynamoDB"
+      ],
+      "apis": [
+        "REST",
+        "GraphQL"
+      ]
     },
-    
     "experience_years": "3+",
-    
-    "favorite_frameworks": ["Spring Boot", "Angular"],
-    
+    "favorite_frameworks": [
+      "Spring Boot",
+      "Angular"
+    ],
     "looking_for_roles": [
       "Backend Developer",
       "Full Stack Developer",
       "Cloud Engineer",
       "AI Engineer"
     ],
-    
     "learning_journey": "I started as a computer science and engineering student and learned to code through my degree, followed by internships and freelance work to improve my skills.",
-    
     "why_developer": "I love building stuff and enjoy sharing what I built with others. What better thing than building software for a living, right!",
-    
     "projects": [
       {
         "name": "Portfolio 2025",
         "type": "personal",
         "description": "Modern Angular portfolio website",
-        "tech": ["Angular", "TypeScript"],
+        "tech": [
+          "Angular",
+          "TypeScript"
+        ],
         "github": "https://github.com/Prateesh-Sulikeri/Portfolio2025",
         "live": "https://prateesh-sulikeri-portfolio.vercel.app/"
       },
@@ -46,19 +72,24 @@
         "name": "CloneCatch",
         "type": "personal",
         "description": "ML-based code plagiarism detection",
-        "tech": ["Python", "Machine Learning"],
+        "tech": [
+          "Python",
+          "Machine Learning"
+        ],
         "github": "https://github.com/Prateesh-Sulikeri/CloneCatch"
       },
       {
         "name": "Redditorials",
         "type": "personal",
         "description": "Reddit content analysis tool",
-        "tech": ["Python", "API Integration"],
+        "tech": [
+          "Python",
+          "API Integration"
+        ],
         "github": "https://github.com/Prateesh-Sulikeri/redditorials"
       }
     ]
   },
-  
   "social": {
     "github": "Prateesh-Sulikeri",
     "leetcode": "sulikeriprateesh7",
@@ -69,196 +100,218 @@
     "resume": "https://github.com/Prateesh-Sulikeri/Portfolio2025/blob/Master/public/Prateesh_Sulikeri_Resume.pdf",
     "know_more": "https://prateesh-sulikeri-portfolio.vercel.app/know-more"
   },
-  
   "bot": {
     "name": "JinBo",
     "creator": "Prateesh Sulikeri",
     "built_with": "Express.js, NLP, Langchain, Hugging Face AI APIs",
     "built_by": "Prateesh with help from public docs and Claude Code assistant"
   },
-  
   "resources": {
     "aws": "Udemy courses from Stephane Maarek",
     "general_programming": "FreeCodeCamp tutorials",
     "dsa": "Striver's DSA Sheet and NeetCode.io",
     "youtube": "ThePrimeagen (Primetime)"
   },
-  
+  "education": [
+    {
+      "level": "Bachelor of Engineering",
+      "degree": "B.E in Computer Science and Engineering",
+      "institute": "KLE Dr M.S Sheshgiri College of Engineering and Technology",
+      "location": "Belagavi",
+      "year": 2024,
+      "cgpa": 8.7,
+      "percentage": null
+    },
+    {
+      "level": "Pre-University",
+      "degree": "P.U 2nd Year (+2 / 12th)",
+      "institute": "SGVs Mahesh P.U College",
+      "location": "Belagavi",
+      "year": 2020,
+      "cgpa": null,
+      "percentage": 86
+    },
+    {
+      "level": "Secondary School",
+      "degree": "SSLC (10th)",
+      "institute": "MVMs English Medium High School",
+      "location": "Belagavi",
+      "year": 2018,
+      "cgpa": null,
+      "percentage": 95
+    }
+  ],
   "responses": {
     "greeting": [
       "Hey! I'm JinBo, Prateesh's AI assistant. I can tell you about his skills, projects, experience, or how to connect. What interests you?",
       "Hi there! I'm JinBo. I help people learn about Prateesh's work. Ask me about his tech stack, projects, experience, or contact info!",
       "Hello! I'm JinBo, here to help you learn about Prateesh Sulikeri. What would you like to know?"
     ],
-    
     "about_bot": [
       "I'm JinBo, an AI assistant created by Prateesh Sulikeri to help visitors learn about his work. I'm built with Express.js, NLP, Langchain, and Hugging Face AI APIs!",
       "I'm JinBo! Prateesh built me using Express.js and open-source AI tools to answer questions about his work, skills, and experience.",
       "Hey! I'm JinBo, Prateesh's portfolio chatbot. I was created using NLP, Langchain, and Hugging Face APIs to help people like you learn about his work!"
     ],
-    
     "about_creator": [
       "Prateesh Sulikeri is a 23-year-old Software Engineer based in Pune, India. He's a computer science student turned software engineer who loves building stuff! He specializes in backend, full-stack, cloud, and AI engineering.",
       "Prateesh is a Software Engineer from Pune, India. He started as a CS student and built his skills through internships and freelance work. Now he's looking for opportunities in backend, full-stack, cloud, and AI roles!",
       "That's Prateesh Sulikeri - a 23-year-old developer from Pune who loves building software! He went from CS student to software engineer and now works with everything from Java Spring Boot to AI/ML."
     ],
-    
     "tech_stack": [
       "Prateesh works primarily with C++, Java (Spring Boot), AWS, Python, and Shell scripting. He's also well-versed in Angular, TypeScript, Node.js, and other web technologies. Plus, he has experience with ML/Data Science using Pandas, Numpy, Matplotlib, Keras, TensorFlow, PyTorch, Langchain, RAG, and GPT APIs!",
       "His main stack: C++, Java Spring Boot, AWS, Python, and Shell. But he's experienced with Angular, TypeScript, Node.js, React, and a ton of ML tools like TensorFlow, PyTorch, Langchain, and more. He's also worked with IBM DB2, DynamoDB, REST, and GraphQL APIs!",
       "Prateesh's tech arsenal includes C++, Java Spring Boot, AWS, Python, and more. For web: Angular, TypeScript, Node, React. For ML/AI: Pandas, Numpy, TensorFlow, PyTorch, Langchain, RAG, GPT APIs. For databases: IBM DB2, DynamoDB. Plus REST and GraphQL!"
     ],
-    
     "projects_latest": [
       "Latest personal projects on GitHub: [GITHUB_REPOS]. Professionally, he's working at [COMPANY_NAME] on [PROJECT_DETAILS].",
       "Recent work includes: [GITHUB_REPOS] on the personal side, and professionally working at [COMPANY_NAME].",
       "Check out his latest: [GITHUB_REPOS]. He's also working professionally on exciting projects!"
     ],
-    
     "job_seeking": [
       "Yes! Prateesh is actively looking for job opportunities in Backend, Full Stack, Cloud Engineer, and AI Engineering roles. Connect with him at: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Absolutely! He's actively seeking Backend, Full Stack, Cloud Engineer, or AI Engineering positions. Reach out via: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Yes, he's open to opportunities! Looking for Backend, Full Stack, Cloud, or AI Engineering roles. Get in touch: https://prateesh-sulikeri-portfolio.vercel.app/contact-form"
     ],
-    
     "resume": [
       "You can learn more about his skills at: https://prateesh-sulikeri-portfolio.vercel.app/know-more or download his resume from: https://github.com/Prateesh-Sulikeri/Portfolio2025/blob/Master/public/Prateesh_Sulikeri_Resume.pdf",
       "Resume available here: https://github.com/Prateesh-Sulikeri/Portfolio2025/blob/Master/public/Prateesh_Sulikeri_Resume.pdf. Also check out: https://prateesh-sulikeri-portfolio.vercel.app/know-more for detailed info!",
       "Download the resume: https://github.com/Prateesh-Sulikeri/Portfolio2025/blob/Master/public/Prateesh_Sulikeri_Resume.pdf or explore his skills: https://prateesh-sulikeri-portfolio.vercel.app/know-more"
     ],
-    
     "location": [
       "Prateesh lives in Pune, India and prefers working IST daytime shifts.",
       "He's based in Pune, India (IST timezone) and prefers day shifts.",
       "Location: Pune, India. Timezone: IST. Prefers daytime working hours."
     ],
-    
     "contact": [
       "You can reach Prateesh via:\n• Email: prateesh.sulikeri@outlook.com\n• Phone: +91 7892302330\n• GitHub: https://github.com/Prateesh-Sulikeri\n• LinkedIn: https://linkedin.com/in/prateesh-sulikeri\n• LeetCode: https://leetcode.com/u/sulikeriprateesh7\n• Contact Form: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Connect with Prateesh:\n📧 prateesh.sulikeri@outlook.com\n📱 +91 7892302330\n🔗 GitHub: https://github.com/Prateesh-Sulikeri\n💼 LinkedIn: https://linkedin.com/in/prateesh-sulikeri\n📝 Contact: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Here's how to reach him:\nEmail: prateesh.sulikeri@outlook.com\nPhone: +91 7892302330\nPortfolio: https://prateesh-sulikeri-portfolio.vercel.app/contact-form\nGitHub: https://github.com/Prateesh-Sulikeri\nLinkedIn: https://linkedin.com/in/prateesh-sulikeri"
     ],
-    
     "portfolio_tech": [
       "This portfolio is built with Angular and hosted on Vercel. The chatbot (me!) uses Express.js with NLP, Langchain, and Hugging Face AI APIs!",
       "The site runs on Angular (frontend) and Vercel (hosting). I'm powered by Express.js, NLP, Langchain, and open-source Hugging Face models!",
       "Portfolio: Angular + Vercel. Bot: Express.js + NLP + Langchain + Hugging Face AI. Pretty cool stack!"
     ],
-    
     "source_code": [
       "Yes! The portfolio source code is public: https://github.com/Prateesh-Sulikeri/Portfolio2025",
       "Source code is available on GitHub: https://github.com/Prateesh-Sulikeri/Portfolio2025. Check it out!",
       "Yep, it's open source! Here: https://github.com/Prateesh-Sulikeri/Portfolio2025"
     ],
-    
     "favorite_frameworks": [
       "Prateesh's favorites are Spring Boot and Angular!",
       "He loves working with Spring Boot (backend) and Angular (frontend)!",
       "Top picks: Spring Boot for backend, Angular for frontend."
     ],
-    
     "collaboration": [
       "Sure! Reach out through:\n• Contact Form: https://prateesh-sulikeri-portfolio.vercel.app/contact-form\n• LinkedIn: https://linkedin.com/in/prateesh-sulikeri\n• GitHub: https://github.com/Prateesh-Sulikeri\n• Email: prateesh.sulikeri@outlook.com",
       "Absolutely! Contact him at: https://prateesh-sulikeri-portfolio.vercel.app/contact-form or connect via LinkedIn/GitHub!",
       "Yes! Get in touch via the contact form (https://prateesh-sulikeri-portfolio.vercel.app/contact-form) or his socials!"
     ],
-    
     "learning_first_language": [
       "Prateesh recommends starting with C! It's the best first programming language as you learn to code and understand resources from scratch. Don't worry about mistakes or bad code - everyone starts somewhere. Consistency is key!",
       "Go with C! You'll learn coding fundamentals and how things work under the hood. Don't stress about mistakes - we all start somewhere. Just be consistent!",
       "Start with C. It teaches you the fundamentals from scratch. You'll make mistakes and write bad code at first - that's normal! Stay consistent and you'll improve."
     ],
-    
     "build_portfolio": [
       "Check out the source code: https://github.com/Prateesh-Sulikeri/Portfolio2025/ or look for Angular tutorials online. First: design, plan content, decide what goes where, create a framework, then code! You don't need to use the exact same tech stack - use what you're comfortable with.",
       "You can reference Prateesh's code on GitHub: https://github.com/Prateesh-Sulikeri/Portfolio2025/. Pro tip: Plan first (design, content, layout), then code. Use any tech stack you're comfortable with!",
       "Start by checking out: https://github.com/Prateesh-Sulikeri/Portfolio2025/. The key: design first, plan your content, build the framework, then code. Don't feel locked into Angular - use what works for you!"
     ],
-    
     "resources": [
       "Prateesh recommends:\n• AWS: Udemy courses from Stephane Maarek\n• Programming: FreeCodeCamp tutorials\n• DSA: Striver's DSA Sheet and NeetCode.io\n• Tech/Programming: ThePrimeagen (Primetime on YouTube)",
       "Great resources:\nAWS → Stephane Maarek's Udemy courses\nGeneral Programming → FreeCodeCamp\nDSA → Striver's DSA Sheet, NeetCode.io\nYouTube → ThePrimeagen",
       "Here's what Prateesh uses:\n- AWS: Stephane Maarek (Udemy)\n- Programming: FreeCodeCamp\n- DSA: Striver's Sheet + NeetCode.io\n- YouTube: ThePrimeagen"
     ],
-    
     "mentoring": [
       "Unfortunately not currently, but you can reach out for collaborations through: https://prateesh-sulikeri-portfolio.vercel.app/contact-form or his socials!",
       "Not at the moment, but feel free to connect for potential collaboration: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "He's not mentoring right now, but you can reach out about collaborations: https://prateesh-sulikeri-portfolio.vercel.app/contact-form"
     ],
-    
     "freelance": [
       "Yes! Prateesh takes freelance projects. He does web/app development and AI-ML consultation. Reach out at: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Absolutely! He's available for freelance work - web/app dev and AI-ML projects. Contact: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Yes, he does freelance! Services include web/app development and AI-ML consulting. Get in touch: https://prateesh-sulikeri-portfolio.vercel.app/contact-form"
     ],
-    
     "experience_domains": [
       "Prateesh has 3+ years of experience in web/app development, AI, and automation!",
       "He's got 3+ years working with web apps, AI/ML, and automation systems.",
       "3+ years of experience across web development, AI/ML, and automation."
     ],
-    
     "pricing": [
       "For project pricing and rates, please reach out directly: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Connect via the contact form to discuss rates: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Reach out for pricing details: https://prateesh-sulikeri-portfolio.vercel.app/contact-form"
     ],
-    
     "background": [
       "Prateesh is a computer science student turned software engineer! Started with a CS degree, learned through internships and freelance work, and now builds full-stack and AI applications.",
       "He's a CS grad who became a software engineer. Built his skills through studies, internships, and freelance projects.",
       "Computer science student → software engineer. Learned through degree + real-world experience via internships and freelance work."
     ],
-    
     "blog_frequency": [
       "Prateesh doesn't have a fixed schedule - he writes when inspiration strikes!",
       "No set schedule - he blogs when the mood hits!",
       "He writes whenever his mind wants him to write - no fixed timeline!"
     ],
-    
     "open_source": [
       "He hasn't dived into open source yet, but you can reach out for collaborations: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Not into open source currently, but open to collaboration! Connect: https://prateesh-sulikeri-portfolio.vercel.app/contact-form",
       "Open source is on the horizon! For now, reach out about collaborations: https://prateesh-sulikeri-portfolio.vercel.app/contact-form"
     ],
-    
     "personal_info": [
       "Prateesh is a 23-year-old male (he/him) based in Pune, India!",
       "23 years old, male (preferred pronouns: he/him), lives in Pune, India.",
       "Age: 23, Gender: Male (he/him), Location: Pune, India."
     ],
-    
     "inappropriate_hacking": [
       "No, I do not support or endorse illegal hacking.",
       "That's a hard no. Illegal activities aren't something I can help with.",
       "I can't help with that. Let's talk about legal tech stuff instead!"
     ],
-    
     "homework": [
       "I can't do homework for you, but I can point you to great learning resources! Want some recommendations?",
       "No homework help, but I can share resources to help you learn!",
       "Can't help with homework directly, but check out the learning resources Prateesh recommends!"
     ],
-    
     "dating": [
       "We can be friends! But let's keep this professional and talk about tech! 😊",
       "Friends? Sure! But I'm here to talk about Prateesh's work. What would you like to know?",
       "How about we stay friends and discuss tech instead? 😄"
     ],
-    
     "api_keys": [
       "Sure, here you go: loludumb_nice_try 😄 Do you also want bank details? But seriously - let's talk about real stuff!",
       "Here's my API key: nice_try_buddy 😂 Want to ask about actual tech stuff instead?",
       "LOL. API key: not_happening. Let me tell you about Prateesh's real work instead!"
     ],
-    
     "default": [
       "Hmm, I'm not quite sure how to answer that specific question 🤔. But I'd love to help you with:\n\n• Prateesh's tech stack and skills\n• His projects and experience\n• GitHub repositories and code\n• LeetCode problem-solving stats\n• How to contact or collaborate\n• Job opportunities and availability\n\nWhat would you like to know?",
       "I tried to understand your question, but I'm not confident I can give you the right answer 😅. Here's what I'm great at:\n\n- Background and experience\n- Technical skills and projects\n- GitHub and LeetCode stats\n- Career opportunities\n- Contact information\n\nTry asking about any of these!",
       "I'm having trouble finding the perfect answer for that one 🤷. Let me help you with something I know well:\n\n✓ Tech stack and programming skills\n✓ Portfolio projects\n✓ Work experience and background\n✓ How to get in touch\n✓ Job availability\n\nWhat interests you most?"
     ],
+        "education": [
+      "Prateesh completed his B.E in Computer Science and Engineering from KLE Dr M.S Sheshgiri College of Engineering and Technology, Belagavi in 2024 with a CGPA of 8.7.\n\nPrevious education:\n• P.U 2nd Year (12th) - SGVs Mahesh P.U College, Belagavi (2020) - 86%\n• SSLC (10th) - MVMs English Medium High School, Belagavi (2018) - 95%",
+      
+      "Education Background:\n🎓 B.E in Computer Science - KLE Dr M.S Sheshgiri College (2024) - CGPA: 8.7\n📚 12th Grade - SGVs Mahesh P.U College (2020) - 86%\n📖 10th Grade - MVMs English Medium High School (2018) - 95%\n\nAll from Belagavi!",
+      
+      "He's a B.E Computer Science graduate (2024) from KLE Dr M.S Sheshgiri College, Belagavi with 8.7 CGPA. Before that: 86% in 12th from SGVs Mahesh P.U College and 95% in 10th from MVMs English Medium High School."
+    ],
     
+    "college": [
+      "Prateesh graduated from KLE Dr M.S Sheshgiri College of Engineering and Technology, Belagavi in 2024 with a B.E in Computer Science and Engineering (CGPA: 8.7)!",
+      "He's an alumnus of KLE Dr M.S Sheshgiri College of Engineering and Technology, Belagavi - graduated in 2024 with 8.7 CGPA in Computer Science!",
+      "College: KLE Dr M.S Sheshgiri College of Engineering and Technology, Belagavi\nDegree: B.E in Computer Science and Engineering\nYear: 2024\nCGPA: 8.7"
+    ],
+    
+    "degree": [
+      "Prateesh holds a B.E in Computer Science and Engineering from KLE Dr M.S Sheshgiri College of Engineering and Technology, Belagavi (2024, CGPA: 8.7).",
+      "He's a B.E Computer Science Engineering graduate! Graduated in 2024 with 8.7 CGPA from KLE Dr M.S Sheshgiri College, Belagavi.",
+      "Degree: Bachelor of Engineering in Computer Science and Engineering (B.E CSE)\nInstitute: KLE Dr M.S Sheshgiri College, Belagavi\nYear: 2024\nCGPA: 8.7"
+    ],
+    
+    "schooling": [
+      "Prateesh completed his schooling in Belagavi:\n• 12th (P.U) - SGVs Mahesh P.U College (2020) - 86%\n• 10th (SSLC) - MVMs English Medium High School (2018) - 95%",
+      "School background:\nP.U 2nd Year - SGVs Mahesh P.U College, Belagavi (2020) with 86%\nSSLC - MVMs English Medium High School, Belagavi (2018) with 95%",
+      "He went to MVMs English Medium High School for 10th (95% - 2018) and SGVs Mahesh P.U College for 12th (86% - 2020), both in Belagavi!"
+    ],
     "fallback": "I searched through what I know, but couldn't find a good answer to that 😕. For questions outside my knowledge, you can reach Prateesh directly:\n\n📝 Contact Form: https://prateesh-sulikeri-portfolio.vercel.app/contact-form\n📧 Email: prateesh.sulikeri@outlook.com\n💼 LinkedIn: https://linkedin.com/in/prateesh-sulikeri\n\nHe'll be happy to help!"
   }
 }
