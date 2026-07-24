@@ -5,11 +5,13 @@ This guide covers how to deploy JinBo chatbot to various free hosting platforms.
 ## 📋 Pre-Deployment Checklist
 
 - [ ] All dependencies listed in `package.json`
-- [ ] `knowledge-base.json` is valid JSON
+- [ ] `Prateesh_Master_Knowledge_Base_2026.json` is valid JSON
 - [ ] Test bot locally with `npm start`
 - [ ] Run tests with `npm test`
 - [ ] `.gitignore` file in place
 - [ ] README.md updated with your info
+- [ ] Decide whether to set `GROQ_API_KEY` in production (optional - the bot is
+      fully functional without it, just rule-based only)
 
 ## 🌐 Render (Recommended - Free Tier Available)
 
@@ -32,7 +34,12 @@ This guide covers how to deploy JinBo chatbot to various free hosting platforms.
 4. **Environment Variables** (Optional):
    ```
    NODE_ENV=production
+   GROQ_API_KEY=your-free-groq-api-key
+   GROQ_MODEL=llama-3.1-8b-instant
+   RATE_LIMIT_MAX=20
    ```
+   Get a free key at [console.groq.com/keys](https://console.groq.com/keys).
+   Omitting `GROQ_API_KEY` is fine - the bot runs in rule-based-only mode.
 
 5. **Deploy**: Click "Create Web Service"
 
@@ -99,6 +106,7 @@ This guide covers how to deploy JinBo chatbot to various free hosting platforms.
 4. **Environment Variables**:
    ```
    NODE_ENV=production
+   GROQ_API_KEY=your-free-groq-api-key
    ```
 
 5. **Deploy**: Click "Deploy"
@@ -304,7 +312,7 @@ curl https://your-app.com/api/kb-info
 
 **Solution:**
 - Check server logs
-- Verify `knowledge-base.json` is valid
+- Verify `Prateesh_Master_Knowledge_Base_2026.json` is valid
 - Test locally first
 
 ### Issue: CORS errors
@@ -329,8 +337,17 @@ const PORT = process.env.PORT || 3000;
 
 **Solution:**
 - Verify file is in root directory
-- Check file name exactly: `knowledge-base.json`
+- Check file name exactly: `Prateesh_Master_Knowledge_Base_2026.json`
 - Ensure it's committed to git
+
+### Issue: `source` is always `"rule-based"`, never `"ai"`
+
+**Solution:**
+- Confirm `GROQ_API_KEY` is set in the platform's environment variables (exact
+  name, no typos/spaces)
+- Check server logs for `[Groq] AI path failed, falling back to rule-based: ...`
+  - a `429`/rate-limit message here is expected occasionally on the free tier
+    and self-recovers after a short cooldown
 
 ---
 
@@ -358,19 +375,24 @@ For production, consider:
 
 ## 🔒 Security Considerations
 
-1. **Rate Limiting**: Add middleware for production
-   ```bash
-   npm install express-rate-limit
-   ```
+1. **Rate Limiting**: Already implemented on `/api/chat` (default 20 req/min/IP,
+   configurable via `RATE_LIMIT_MAX`/`RATE_LIMIT_WINDOW_MS`) - protects the
+   shared free Groq quota from being drained
 
-2. **Helmet.js**: Security headers
+2. **Prompt-Injection Guardrails**: Known injection phrasing (e.g. "ignore
+   previous instructions", "reveal your system prompt") is intercepted in code
+   before it ever reaches Groq, in addition to instructions in the system
+   prompt itself
+
+3. **Helmet.js**: Security headers - not yet added, consider for production
    ```bash
    npm install helmet
    ```
 
-3. **Input Validation**: Already implemented (500 char limit)
+4. **Input Validation**: Already implemented (500 char limit)
 
-4. **CORS**: Configure for your domain only
+5. **CORS**: Currently wide open (`app.use(cors())`) - configure for your
+   domain only if this isn't meant to be a publicly embeddable widget
 
 ---
 

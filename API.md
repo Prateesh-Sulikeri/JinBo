@@ -15,8 +15,19 @@ No authentication required. The API is publicly accessible.
 
 ## Rate Limiting
 
-- **Development:** No rate limiting
-- **Production:** Recommended to implement rate limiting (see README.md)
+`POST /api/chat` is rate-limited per IP to protect the shared free Groq API
+quota from being drained (`GET /health` and `GET /api/kb-info` are not affected).
+
+- **Default limit:** 20 requests per 60-second window per IP
+- **Configurable via:** `RATE_LIMIT_MAX` and `RATE_LIMIT_WINDOW_MS` env vars
+- **Exceeded response:** `429 Too Many Requests`
+  ```json
+  { "error": "Too many requests, please slow down and try again shortly." }
+  ```
+
+Separately, Groq's own free-tier rate limits may also be hit under heavy AI-path
+traffic; in that case requests transparently fall back to the rule-based engine
+(`source: "rule-based"` in the response) rather than erroring.
 
 ---
 
@@ -79,7 +90,11 @@ curl -X POST http://localhost:3000/api/chat \
 **Request Body:**
 ```json
 {
-  "message": "What is Prateesh's tech stack?"
+  "message": "What is Prateesh's tech stack?",
+  "history": [
+    { "role": "user", "content": "Hi" },
+    { "role": "assistant", "content": "Hey! I'm JinBo..." }
+  ]
 }
 ```
 
@@ -89,19 +104,29 @@ curl -X POST http://localhost:3000/api/chat \
   - Max length: 500 characters
   - Type: string
   - Trimmed automatically
+- `history` (array, optional): Prior conversation turns for light multi-turn
+  context on the AI path (the server itself is stateless). Each entry is
+  `{ role: "user" | "assistant", content: string }`. Only the last 6 entries
+  are used (configurable via `MAX_HISTORY_MESSAGES`); malformed entries or an
+  invalid `role` are silently dropped rather than rejected.
 
 **Response:** `200 OK`
 ```json
 {
   "response": "Prateesh works primarily with Go, C++, Java (Spring Boot), AWS, Python, and Shell scripting. He's also experienced in Angular, TypeScript, Node.js, React, and ML/AI tools like TensorFlow, PyTorch, Langchain, and RAG. His database experience includes PostgreSQL, Redis, IBM DB2, and DynamoDB!",
   "intent": "tech_stack",
+  "source": "ai",
   "timestamp": "2024-12-30T10:30:00.000Z"
 }
 ```
 
 **Response Fields:**
 - `response` (string): Bot's response to the user's message
-- `intent` (string): Detected intent/category of the user's message
+- `intent` (string): Detected intent/category of the user's message - always
+  computed via the rule-based classifier regardless of which path answered
+- `source` (string): `"ai"` if Groq generated the response, or `"rule-based"`
+  if it fell back to the deterministic engine (no API key configured, the
+  Groq call errored/timed out, or it's in a post-rate-limit cooldown)
 - `timestamp` (string): ISO 8601 timestamp of the response
 
 **Status Codes:**
@@ -152,7 +177,7 @@ curl http://localhost:3000/api/kb-info
     "Python",
     "Shell Scripting"
   ],
-  "availableIntents": 30
+  "availableIntents": 47
 }
 ```
 
@@ -213,6 +238,9 @@ The bot can detect and respond to these intents:
 | `projects` | Portfolio projects | "Show me his projects" |
 | `go_project` | Go Event Ingestor project | "Tell me about the Go project" |
 | `job_seeking` | Job opportunities | "Is he looking for a job?" |
+| `current_job` | Current employer/role | "Where does he currently work?" |
+| `active_projects` | Currently-building projects | "What's he working on now?" |
+| `career_goals` | Long-term career vision | "What are his career goals?" |
 | `resume` | Resume/CV information | "Where can I get his resume?" |
 | `location` | Geographic location | "Where does he live?" |
 | `contact` | Contact information | "How can I contact him?" |
@@ -268,6 +296,7 @@ import { catchError, retry } from 'rxjs/operators';
 interface ChatResponse {
   response: string;
   intent: string;
+  source: 'ai' | 'rule-based';
   timestamp: string;
 }
 

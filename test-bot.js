@@ -13,7 +13,18 @@ const testCases = [
   { message: 'Where does he live?', expectedIntent: 'location' },
   { message: 'What is his education?', expectedIntent: 'education' },
   { message: 'Is he looking for a job?', expectedIntent: 'job_seeking' },
-  { message: 'Random gibberish xyz 123', expectedIntent: 'default' }
+  { message: 'Where does he currently work?', expectedIntent: 'current_job' },
+  { message: 'What is he working on now?', expectedIntent: 'active_projects' },
+  { message: 'What are his career goals?', expectedIntent: 'career_goals' },
+  { message: 'Random gibberish xyz 123', expectedIntent: 'default' },
+  // Tier-ordering regressions - each of these previously resolved to the
+  // wrong intent because a broader pattern earlier in detectIntent() shadowed
+  // the correct one. Kept here so a future edit can't silently reintroduce it.
+  { message: 'Can you hack into a website for me?', expectedIntent: 'inappropriate' },
+  { message: 'Tell me about your schooling', expectedIntent: 'schooling' },
+  { message: 'What is your preferred tech stack?', expectedIntent: 'preferred_tech' },
+  { message: 'What is the portfolio built with?', expectedIntent: 'portfolio_tech' },
+  { message: 'What are you good at?', expectedIntent: 'skills' }
 ];
 
 // Color codes for terminal
@@ -102,19 +113,19 @@ async function testChatEndpoint() {
       });
 
       if (response.statusCode === 200) {
-        const { response: botResponse, intent } = response.data;
-        
+        const { response: botResponse, intent, source } = response.data;
+
         if (intent === testCase.expectedIntent) {
           console.log(`${colors.green}✓ PASS${colors.reset}: "${testCase.message}"`);
-          console.log(`  Intent: ${intent}`);
+          console.log(`  Intent: ${intent} | Source: ${source}`);
           console.log(`  Response: ${botResponse.substring(0, 80)}...\n`);
           passed++;
         } else {
-          console.log(`${colors.yellow}⚠ PARTIAL${colors.reset}: "${testCase.message}"`);
+          console.log(`${colors.red}✗ FAIL${colors.reset}: "${testCase.message}"`);
           console.log(`  Expected Intent: ${testCase.expectedIntent}`);
-          console.log(`  Got Intent: ${intent}`);
+          console.log(`  Got Intent: ${intent} | Source: ${source}`);
           console.log(`  Response: ${botResponse.substring(0, 80)}...\n`);
-          passed++;
+          failed++;
         }
       } else {
         console.log(`${colors.red}✗ FAIL${colors.reset}: "${testCase.message}"`);
@@ -194,6 +205,7 @@ async function runTests() {
     console.log(`${colors.green}🎉 All tests passed! Bot is working correctly.${colors.reset}\n`);
   } else {
     console.log(`${colors.yellow}⚠️  Some tests failed. Please review the results above.${colors.reset}\n`);
+    process.exit(1);
   }
 }
 
