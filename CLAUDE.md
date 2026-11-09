@@ -2,18 +2,29 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Commands
+## Status: v2 rebuild in progress
+
+The `v2` branch is a from-scratch Python rebuild that follows the design doc "JinBo 2.0 — Python Design Doc" (https://claude.ai/artifact/HeY6Wi7BwxAFTnMa4askuR), which has phases 0–9. The live v1 (Node/Express) is on `main` and copied into `legacy/` on this branch for reference. It is deleted in Phase 9.
+
+This is a learning project: the user writes the code, and Claude explains, gives hints and reviews. Claude writes code only for boilerplate or when asked.
+
+## Commands (v2)
 
 ```bash
-npm install       # install dependencies
-npm start         # run server (http://localhost:3000)
-npm run dev       # run with nodemon (auto-reload)
-npm test          # run test-bot.js against a running server
+make install     # uv sync
+make check       # lint + typecheck + test
+make format      # ruff format + autofix
+uv run jinbo     # CLI
+uv run pytest    # tests (no running server needed)
 ```
 
-`npm test` requires the server to already be running in another terminal — `test-bot.js` makes live HTTP requests to `http://localhost:3000` and exits early if the health check fails. There is no unit test framework; there is no lint command configured.
+Python 3.12, uv, src/ layout (`src/jinbo/`), ruff, pyright (standard mode), pytest. `legacy/` is excluded from ruff and pyright.
 
-## Architecture
+## Legacy v1 (`legacy/`)
+
+Everything below describes v1. Its file paths are now under `legacy/` (e.g. `legacy/server.js`). To run it: `cd legacy && npm install && npm start`.
+
+### Architecture
 
 JinBo is a single-file Express server (`server.js`) implementing a hybrid chatbot for a portfolio site: a real generative AI path (Groq's Llama models) with a deterministic rule-based engine as an automatic fallback. There is no database — all state lives in `Prateesh_Master_Knowledge_Base_2026.json`, loaded into memory once at startup and normalized into the `knowledgeBase` object.
 
@@ -37,6 +48,6 @@ JinBo is a single-file Express server (`server.js`) implementing a hybrid chatbo
 
 **Env vars** (all optional, see `.env.example`): `GROQ_API_KEY` (absence = rule-based-only mode, no error), `GROQ_MODEL`, `GROQ_TIMEOUT_MS`, `MAX_HISTORY_MESSAGES`, `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX`.
 
-## Docs in this repo
+### Docs in legacy/
 
 `README.md`, `QUICKSTART.md`, `API.md`, and `DEPLOYMNT.md` are user-facing setup/deployment/API-reference docs (Render/Railway/Heroku/Docker instructions, integration snippets for Angular/React/plain JS). They largely restate what's in `server.js`; prefer reading the code directly over these when making behavioral changes, but check `DEPLOYMNT.md`/`API.md` before changing endpoint contracts since external consumers may rely on the documented shapes.
