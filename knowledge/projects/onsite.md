@@ -5,7 +5,7 @@ tagline: Practice the interview loop. Out loud.
 status: active            # actively maintained, open source
 type: personal
 category: Applied AI
-released: 2026-11-03      # v1.0.0
+released: 2026-11-02      # v1.0.0
 featured: true
 rank: 1
 role: Creator, open-source maintainer, lead developer
@@ -20,7 +20,7 @@ links:
 
 # Overview
 
-Onsite is a free, open-source, local-first desktop app for practising full software-engineering interview loops out loud. A spoken AI interviewer runs résumé screening, coding (DSA), system design, low-level design, project deep-dive and behavioural rounds, asks follow-up questions, and gives honest rubric-based feedback at the end. Version 1.0.0 shipped on 3 November 2026. It's his main open-source project.
+Onsite is a free, open-source, local-first desktop app for practising full software-engineering interview loops out loud. A spoken AI interviewer runs résumé screening, coding (DSA), system design, low-level design, project deep-dive and behavioural rounds, asks follow-up questions, and gives honest rubric-based feedback at the end. Version 1.0.0 shipped on 2 November 2026. It's his main open-source project.
 
 # Why he built it
 
@@ -121,7 +121,7 @@ The whiteboard is converted to structured text (shapes, containment, labelled ar
 
 # Results
 
-- 100+ downloads in the first 24 hours and about 200 downloads in total.
+- About 200 downloads so far (100+ in the first 24 hours).
 - 300+ feedback forms submitted.
 - About 1,000+ website visits with almost no marketing.
 

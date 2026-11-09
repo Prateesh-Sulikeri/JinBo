@@ -10,7 +10,7 @@ sources: [résumé PDF, portfolio /about, intake]
 
 Pune, India · hybrid · client: CLS Bank · domain: FX trade message processing for a high-volume foreign-exchange settlement platform used by global financial institutions.
 
-He joined as an Associate Software Engineer (G1) in April 2024 and was promoted to Software Engineer (G2) in 2026. He builds and maintains components within an existing platform. He did not design the overall CLS architecture.
+He joined as an Associate Software Engineer (G1) in April 2024 and was promoted to Software Engineer (G2) in the April 2026 appraisal cycle, effective August 2026. He builds and maintains components within an existing platform. He did not design the overall CLS architecture.
 
 Day to day he implements new features, fixes defects, writes unit and component tests, makes performance improvements, and applies AI to improve the team's engineering workflow. He works with business analysts, test teams and customers on requirements, production issues and releases.
 
@@ -63,7 +63,7 @@ He left after receiving a full-time offer from Xoriant.
 
 ## B.E. Computer Science and Engineering (August 2020 – May 2024)
 
-KLE College of Engineering and Technology (also known as KLE Dr. M.S. Sheshgiri College of Engineering and Technology), Belagavi, Karnataka. CGPA 8.7/10.
+KLE College of Engineering and Technology (also known as KLE Dr. M.S. Sheshgiri College of Engineering and Technology), Belagavi, Karnataka. CGPA 8.76/10.
 
 - **Final-year project:** "Survey of Machine Learning Algorithms for Rainfall Prediction".
 - **Coding Club:** the first Club Head of the KLE Coding Club. He organised several inter-college, district-level hackathons and gaming competitions.

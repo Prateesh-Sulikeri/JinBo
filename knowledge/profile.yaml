@@ -42,7 +42,7 @@ career:
     domain: FX trade message processing (banking and finance)
     title: Software Engineer (G2)
     promoted_from: Associate Software Engineer (G1)
-    promoted: 2026-06             # CONFIRM: intake said April, pasted KB said August, /about says June
+    promoted: 2026-08             # effective date; decided in the April 2026 appraisal cycle
     started: 2024-04-22
   career_started: 2023-06-01      # Persistent Systems internship
   experience_rule: >-
@@ -82,6 +82,6 @@ links:
   x: https://x.com/Prateesh2002
   youtube: https://www.youtube.com/@TheJinxxedCoder
 
-education_summary: B.E. Computer Science and Engineering, KLE College of Engineering and Technology, Belagavi (2020–2024), CGPA 8.7/10
+education_summary: B.E. Computer Science and Engineering, KLE College of Engineering and Technology, Belagavi (2020–2024), CGPA 8.76/10
 
 featured_projects: [onsite, distributed-payment-gateway, scalecraft, jinbo]

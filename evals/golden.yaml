@@ -32,7 +32,7 @@
 
 - id: onsite-release
   q: When was Onsite 1.0 released?
-  must: [November 2026]
+  must: [2 November 2026]
   sources: [projects/onsite.md]
 
 - id: no-kubernetes-prod
@@ -64,7 +64,7 @@
 
 - id: education
   q: Where did he study?
-  must: [KLE, [Computer Science, CSE], "8.7"]
+  must: [KLE, [Computer Science, CSE], "8.76"]
   never: ["95%", "86%"]   # school marks must not be shared
 
 - id: contact

@@ -42,6 +42,7 @@ claim_rules:                  # anti-overselling guardrails (also checked by eva
   - Never say Prateesh designed or owned the overall CLS Bank architecture. He built and maintains components within it.
   - Don't claim Angular, Go, professional Kubernetes or AWS production experience, advanced RAG, fine-tuning, PyTorch or TensorFlow proficiency.
   - Don't invent metrics. Use only the numbers in the knowledge base.
+  - Where the résumé PDF and this knowledge base differ, the knowledge base wins (the PDF is older). Link the PDF, but never quote numbers from it that aren't in the KB.
   - Don't position him only as an FDE or only as an AI engineer. His title is Software Engineer.
   - Don't invent plans to move to or work in Japan.
   - For freelance, mentoring or time commitments, say he's open to it and that details need confirming with him.

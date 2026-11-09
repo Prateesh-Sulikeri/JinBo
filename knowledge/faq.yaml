@@ -37,13 +37,13 @@
   answer: >-
     Prateesh Sulikeri · Software Engineer at Xoriant (client: CLS Bank) · Pune, India · {years_fulltime} years
     full-time ({years_total} including his internship) · Java, Spring Boot, Kafka, PostgreSQL, Redis + Applied AI ·
-    B.E. CSE, CGPA 8.7 · https://prateesh-sulikeri-portfolio.vercel.app/
+    B.E. CSE, CGPA 8.76 · https://prateesh-sulikeri-portfolio.vercel.app/
 
 - id: current_job
   questions: [where does he work, current job, current company, what does he do at xoriant, current role, designation]
   answer: >-
     He's a Software Engineer (G2) at Xoriant Technologies in Pune, working on CLS Bank's FX trade message
-    processing platform since April 2024. He was promoted from Associate Software Engineer in 2026. He builds
+    processing platform since April 2024. He was promoted from Associate Software Engineer, effective August 2026. He builds
     features, fixes defects, writes tests, improves performance and applies AI to the team's engineering workflow.
 
 - id: work_impact
@@ -121,7 +121,7 @@
   answer: >-
     Onsite is a free, open-source, local-first desktop app for practising full software-engineering interview
     loops out loud: coding, system design, LLD, behavioural, project deep-dives and résumé screening, with
-    deterministic code grading and rubric feedback. Built with Rust and Tauri 2; v1.0.0 shipped on 3 Nov 2026.
+    deterministic code grading and rubric feedback. Built with Rust and Tauri 2; v1.0.0 shipped on 2 Nov 2026.
     https://github.com/Prateesh-Sulikeri/Onsite · https://prateesh-sulikeri.github.io/Onsite/
 
 - id: payment_gateway
@@ -155,7 +155,7 @@
   questions: [education, degree, college, university, cgpa, where did he study]
   answer: >-
     B.E. in Computer Science and Engineering from KLE College of Engineering and Technology, Belagavi
-    (2020–2024), CGPA 8.7/10. He was the first Club Head of the college's Coding Club.
+    (2020–2024), CGPA 8.76/10. He was the first Club Head of the college's Coding Club.
 
 - id: certifications
   questions: [certifications, certificates, awards, achievements]
