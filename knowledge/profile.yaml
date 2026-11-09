@@ -1,0 +1,87 @@
+# Core profile. The bot ALWAYS has this in its prompt (keep it short and factual).
+# Dates are stored instead of ages/durations so the bot computes them and they never go stale.
+# Sources: intake answers (2026-11-09), résumé PDF, portfolio /about page.
+
+name:
+  full: Prateesh Pramod Sulikeri
+  display: Prateesh Sulikeri
+  pronunciation: "pruh-TEE-ish"   # from intake: Pra(pruh) TE + ESH(ish)
+pronouns: he/him
+birth_date: 2002-05-11            # bot derives age from this; never quote the date itself
+
+location:
+  current: Pune, Maharashtra, India
+  hometown: Belagavi, Karnataka, India
+  timezone: IST (UTC+05:30)
+  work_mode: hybrid
+  open_to_locations: anywhere in India
+
+languages:
+  - {name: English, level: professional}
+  - {name: Kannada, level: native}
+  - {name: Hindi, level: conversational}
+  - {name: Marathi, level: conversational}
+  - {name: Japanese, level: hobby, note: "learning casually, not conversational"}
+
+headline: >-
+  Software Engineer specialising in distributed systems, cloud and Applied AI.
+specialisation: >-
+  Builds reliable backend systems and AI-powered applications, specialising in Java,
+  distributed systems, LLM integration and agentic AI orchestration.
+bio: >-
+  Software Engineer at Xoriant Technologies, building Java and Spring Boot services for
+  CLS Bank's FX settlement platform since April 2024. Works on REST APIs, distributed
+  processing, PostgreSQL, Kafka and Redis, with a focus on reliability and fault-tolerant
+  processing. Outside work he builds Applied AI products, most notably Onsite, an
+  open-source AI interview-practice desktop app.
+
+career:
+  current:
+    company: Xoriant Technologies Pvt. Ltd.
+    client: CLS Bank              # FX settlement. Say nothing about internal systems.
+    domain: FX trade message processing (banking and finance)
+    title: Software Engineer (G2)
+    promoted_from: Associate Software Engineer (G1)
+    promoted: 2026-06             # CONFIRM: intake said April, pasted KB said August, /about says June
+    started: 2024-04-22
+  career_started: 2023-06-01      # Persistent Systems internship
+  experience_rule: >-
+    Compute from dates. Full-time = since started (2024-04). Total incl. internship = since
+    career_started. Say e.g. "about 2.5 years full-time (3+ years including his internship)".
+
+availability:
+  status: open to roles           # shown on /about
+  target_roles:
+    - Software Engineer (backend / Java)
+    - Distributed-systems-focused Software Engineer
+    - Engineering-heavy Forward Deployed Engineer
+    - Applied AI Engineer
+  positioning_note: >-
+    His title is Software Engineer. Don't position him only as an FDE or AI engineer.
+  notice_period: 30 days
+  freelance: open to it, case by case
+  mentoring_and_collabs: open
+  salary_policy: discuss directly with Prateesh. The bot never states or guesses numbers.
+
+contact:
+  preferred_order: [LinkedIn, email]
+  email: sulikeriprateesh7@gmail.com
+  phone: "+91 78923 02330"        # public (on his résumé)
+  contact_page: https://prateesh-sulikeri-portfolio.vercel.app/about#contact
+  reply_time: 24–48 hours
+
+links:
+  portfolio: https://prateesh-sulikeri-portfolio.vercel.app/
+  about: https://prateesh-sulikeri-portfolio.vercel.app/about
+  resume_pdf: https://prateesh-sulikeri-portfolio.vercel.app/resumePdf.pdf
+  projects: https://prateesh-sulikeri-portfolio.vercel.app/projects
+  writing: https://prateesh-sulikeri-portfolio.vercel.app/writing
+  github: https://github.com/Prateesh-Sulikeri
+  linkedin: https://www.linkedin.com/in/prateesh-sulikeri/
+  leetcode: https://leetcode.com/u/sulikeriprateesh7
+  x: https://x.com/Prateesh2002
+  youtube: https://www.youtube.com/@TheJinxxedCoder
+
+education_summary: B.E. Computer Science and Engineering, KLE College of Engineering and Technology, Belagavi (2020–2024), CGPA 8.7/10
+
+featured_projects: [onsite, distributed-payment-gateway, scalecraft, jinbo]

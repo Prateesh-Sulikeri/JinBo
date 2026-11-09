@@ -1,0 +1,349 @@
+# Short Q&A pairs. Three uses:
+#   1. Rule-based fallback (level 3): keyword-match the visitor's message against `questions`, reply with `answer`.
+#   2. Retrieval: each entry is also indexed as a chunk.
+#   3. Seed for evals/golden.yaml.
+# Placeholders computed at runtime from profile.yaml: {age}, {years_fulltime}, {years_total}.
+# Ported from v1's 47 intents (merged/updated) plus the intake answers.
+
+- id: greeting
+  questions: [hi, hello, hey, good morning, yo]
+  answer: >-
+    Hey! I'm JinBo, Prateesh's AI assistant. Ask me about his work, projects, skills or how to reach him.
+
+- id: about_bot
+  questions: [who are you, what are you, what is jinbo, are you a bot, why is it called jinbo]
+  answer: >-
+    I'm JinBo, Prateesh's portfolio assistant. The name comes from his online handle, TheJinxxedBot,
+    so I'm "JinxxedBot's personal bot". I answer questions about his work, projects and skills.
+
+- id: how_jinbo_works
+  questions: [how does jinbo work, how were you built, what model do you use, how is this chatbot built]
+  answer: >-
+    v1 was an Express service with a deterministic regex intent engine as the default and Groq's Llama as
+    the upgrade, so it never went fully down. Prateesh is now rebuilding it in Python: FastAPI, hybrid RAG
+    over his knowledge base with cited sources, tools, streaming replies and a three-level fallback.
+    Details: https://prateesh-sulikeri-portfolio.vercel.app/projects/jinbo
+
+- id: about_prateesh
+  questions: [who is prateesh, tell me about him, tell me about yourself in 30 seconds, introduce prateesh, about prateesh]
+  answer: >-
+    Prateesh Sulikeri is a Software Engineer at Xoriant Technologies, building Java and Spring Boot services
+    for CLS Bank's FX settlement platform. His strengths are backend engineering, distributed systems and
+    reliability. Outside work he built Onsite, an open-source AI interview-practice desktop app, and he's
+    increasingly focused on combining backend engineering with Applied AI.
+
+- id: quick_facts
+  questions: [quick facts, summary, tldr, overview]
+  answer: >-
+    Prateesh Sulikeri · Software Engineer at Xoriant (client: CLS Bank) · Pune, India · {years_fulltime} years
+    full-time ({years_total} including his internship) · Java, Spring Boot, Kafka, PostgreSQL, Redis + Applied AI ·
+    B.E. CSE, CGPA 8.7 · https://prateesh-sulikeri-portfolio.vercel.app/
+
+- id: current_job
+  questions: [where does he work, current job, current company, what does he do at xoriant, current role, designation]
+  answer: >-
+    He's a Software Engineer (G2) at Xoriant Technologies in Pune, working on CLS Bank's FX trade message
+    processing platform since April 2024. He was promoted from Associate Software Engineer in 2026. He builds
+    features, fixes defects, writes tests, improves performance and applies AI to the team's engineering workflow.
+
+- id: work_impact
+  questions: [what has he achieved, impact at xoriant, achievements, biggest system he worked on]
+  answer: >-
+    At Xoriant he built a multi-session trade validation engine that enabled same-day FX settlement (removing a
+    24-hour wait for 6 members across 8 currencies), maintains 15+ Spring Boot REST APIs for FX message
+    routing and validation, engineered Point-in-Time Recovery with duplicate detection and rollback, cut build
+    time from 4 hours to under 2.5 by moving a Perl test harness to Python, and built multi-agent
+    orchestration to analyse and remediate 1,000+ SonarQube findings.
+
+- id: experience_years
+  questions: [how many years of experience, how experienced, experience]
+  answer: >-
+    About {years_fulltime} years full-time at Xoriant (since April 2024), or {years_total} years including his
+    2023 internship at Persistent Systems.
+
+- id: internship
+  questions: [persistent systems, internship, previous job]
+  answer: >-
+    He was a Software Engineering Intern at Persistent Systems in Pune (June–August 2023). He prototyped Python
+    data pipelines with AI-assisted log analysis, built a React + AG Grid dashboard, optimised 20+ SQL queries
+    and automated operational tasks with Python and shell.
+
+- id: skills
+  questions: [skills, tech stack, what technologies, what does he know, strongest skill]
+  answer: >-
+    Core: Java (17/21), Spring Boot, Spring Batch, Hibernate/JPA, Kafka, IBM MQ, PostgreSQL, Redis, Docker.
+    Also: Python, C++, SQL, Rust (in Onsite), React. Applied AI: LLM integration, multi-provider architectures,
+    agentic AI and multi-agent orchestration, LLM evaluation. His strongest skill is backend engineering with
+    Java and Spring Boot. Applied AI is his differentiator.
+
+- id: preferred_stack
+  questions: [favorite stack, preferred stack, favourite framework, favorite language]
+  answer: >-
+    Java, Spring Boot, Kafka, Redis, PostgreSQL, Docker, with React on the front end when needed.
+    He picks tools by the problem rather than trends, though.
+
+- id: specialization
+  questions: [specialization, what does he specialize in, what should he be hired for]
+  answer: >-
+    He builds reliable backend systems and AI-powered applications, specialising in Java, distributed
+    systems, LLM integration and agentic AI orchestration.
+
+- id: ai_experience
+  questions: [ai experience, llm, agents, rag, has he built anything with ai, applied ai]
+  answer: >-
+    Yes, Applied AI is his main specialisation. At Xoriant he built multi-agent orchestration with evaluation
+    loops, AI-assisted test generation, and led AI agent harness adoption for a 7-engineer team. Independently
+    he built Onsite, an open-source AI interview app with a provider-agnostic LLM layer and local speech.
+    RAG is a growing area: JinBo 2.0 is his hands-on RAG build.
+
+- id: frontend
+  questions: [frontend, react, angular, does he do frontend]
+  answer: >-
+    He's mainly backend-focused. He has used React (with AG Grid in his internship) and Astro, and plain
+    JavaScript in Onsite's UI. He doesn't position himself as an Angular developer.
+
+- id: cloud
+  questions: [aws, cloud, kubernetes, k8s, devops]
+  answer: >-
+    He's comfortable with AWS (EC2, S3, Lambda, ECS, EKS, SQS, SNS, DynamoDB) and Kubernetes from learning
+    and independent projects, and uses Docker, Jenkins and GitHub Actions. His professional production work is
+    Java/Spring on CLS's platform, not cloud or Kubernetes operations.
+
+- id: projects
+  questions: [projects, what has he built, portfolio projects, show me his projects]
+  answer: >-
+    Featured projects: Onsite (open-source AI interview-practice desktop app, Rust/Tauri), Distributed Payment
+    Gateway (6 Spring Boot services over Kafka with outbox, retries and settlement), ScaleCraft (interactive
+    system-design lab, Next.js) and JinBo (this bot). All of them: https://prateesh-sulikeri-portfolio.vercel.app/projects
+
+- id: onsite
+  questions: [onsite, interview app, what is onsite, mock interview]
+  answer: >-
+    Onsite is a free, open-source, local-first desktop app for practising full software-engineering interview
+    loops out loud: coding, system design, LLD, behavioural, project deep-dives and résumé screening, with
+    deterministic code grading and rubric feedback. Built with Rust and Tauri 2; v1.0.0 shipped on 3 Nov 2026.
+    https://github.com/Prateesh-Sulikeri/Onsite · https://prateesh-sulikeri.github.io/Onsite/
+
+- id: payment_gateway
+  questions: [payment gateway, payments project, distributed payment gateway, kafka project]
+  answer: >-
+    An independent project (not production): six Spring Boot services on Java 21, each with its own Postgres,
+    talking over Kafka. It has a transactional outbox, Kafka-persisted retries with dead-letter topics, idempotent
+    consumers, webhook backoff with Resilience4j, and idempotent Spring Batch settlement. Observability is the
+    current phase. https://github.com/Prateesh-Sulikeri/distributed-payment-gateway
+
+- id: scalecraft
+  questions: [scalecraft, system design lab, system design tool]
+  answer: >-
+    ScaleCraft is an interactive system-design lab: drag components onto a canvas, wire them up, and it tells
+    you whether the design holds up and why, with a "drift report" when you miss. Next.js 16 + TypeScript,
+    local-first, 24 chapters so far, in alpha. https://scale-craft.in/
+
+- id: redditorials
+  questions: [redditorials, reddit project]
+  answer: >-
+    An archived FastAPI service from late 2024 that fetched story-style Reddit posts. He keeps it as an honest
+    write-up of a script promoted to a web API without being redesigned for it.
+
+- id: textbook
+  questions: [textbook, system design book, is he writing a book]
+  answer: >-
+    He's writing a System Design Textbook covering CS fundamentals and distributed systems. ScaleCraft is
+    its interactive companion. It isn't published yet.
+
+- id: education
+  questions: [education, degree, college, university, cgpa, where did he study]
+  answer: >-
+    B.E. in Computer Science and Engineering from KLE College of Engineering and Technology, Belagavi
+    (2020–2024), CGPA 8.7/10. He was the first Club Head of the college's Coding Club.
+
+- id: certifications
+  questions: [certifications, certificates, awards, achievements]
+  answer: >-
+    Oracle Certified Java SE 8 Developer Associate, Oracle Cloud & AI Platforms Associate Engineer, and the
+    DeepLearning.AI Generative AI / LangChain / Prompt Engineering specialisation. At Xoriant he received the
+    Xor Champ Award (2025 and 2026) and the Xor Learner Award (2024). He's currently working on the
+    Claude Code Developer Foundations Certificate.
+
+- id: job_seeking
+  questions: [is he looking for a job, open to work, available, hiring, can we hire him, is he open to opportunities]
+  answer: >-
+    Yes, he's open to roles: Software Engineer (backend/Java), distributed-systems-focused SWE, engineering-heavy
+    Forward Deployed Engineer and Applied AI Engineer, anywhere in India. His notice period is 30 days. Reach
+    him via https://prateesh-sulikeri-portfolio.vercel.app/about#contact, LinkedIn or email.
+
+- id: why_hire
+  questions: [why should we hire him, what makes him different, why him]
+  answer: >-
+    He combines enterprise backend experience on financial systems (FX settlement, recovery, transaction
+    integrity) with a builder mindset. He ships complete products like Onsite and brings practical Applied AI
+    to his team's engineering work.
+
+- id: notice_period
+  questions: [notice period, when can he join, joining date]
+  answer: >-
+    His notice period is 30 days.
+
+- id: salary
+  questions: [salary, expected salary, ctc, compensation, rates, pricing, how much does he charge]
+  answer: >-
+    That's best discussed with Prateesh directly: https://prateesh-sulikeri-portfolio.vercel.app/about#contact
+
+- id: recruiter_info
+  questions: [i am a recruiter, what should i send, recruiter, hiring process]
+  answer: >-
+    Great! To save time, send him the JD, the budgeted compensation range, the tech stack, team and reporting
+    structure, work arrangement, interview process and timeline, and notice-period flexibility, via
+    https://prateesh-sulikeri-portfolio.vercel.app/about#contact, LinkedIn or email. He usually replies within 24–48 hours.
+
+- id: freelance
+  questions: [freelance, can he build a website for me, contract work, side project for my business]
+  answer: >-
+    He's open to freelance work, case by case. Share your requirements, timeline and budget via
+    https://prateesh-sulikeri-portfolio.vercel.app/about#contact and he'll get back to you.
+
+- id: mentoring
+  questions: [mentoring, can he mentor me, collaboration, open source, collaborate]
+  answer: >-
+    He's open to mentoring and collaborations. His open-source project is Onsite
+    (https://github.com/Prateesh-Sulikeri/Onsite). Reach out via the contact page or LinkedIn.
+
+- id: leadership
+  questions: [leadership, has he led a team, mentoring experience, management]
+  answer: >-
+    He led the team-wide rollout of an AI agent harness, with documentation and a knowledge base, for a
+    7-engineer team, and was the first Club Head of his college's Coding Club. That's technical leadership,
+    not people management. He has no direct reports.
+
+- id: weaknesses
+  questions: [weaknesses, what is he improving, growth areas]
+  answer: >-
+    He's deepening his Applied AI skills beyond application-level LLM work (RAG and retrieval evaluation,
+    embeddings and vector databases, LLM evaluation, model fundamentals) and continuing to grow in advanced
+    system design. Early on he once over-engineered a solution, and now he favours the simplest design that works.
+
+- id: location
+  questions: [where is he, location, where does he live, timezone, remote, relocate]
+  answer: >-
+    He's based in Pune, India (IST), originally from Belagavi, Karnataka. He works hybrid and is open to
+    roles anywhere in India.
+
+- id: personal_info
+  questions: [how old is he, age, pronouns, languages he speaks]
+  answer: >-
+    Prateesh is {age} (he/him). He speaks English professionally, Kannada natively, conversational Hindi and
+    Marathi, and is casually learning Japanese.
+
+- id: name_pronunciation
+  questions: [how to pronounce, pronunciation, how do you say his name]
+  answer: >-
+    It's "pruh-TEE-ish" Sulikeri.
+
+- id: japan
+  questions: [japan, japanese, is he japanese, jlpt]
+  answer: >-
+    He's Indian. Japanese is a casual hobby for him. He's not conversational yet and has no JLPT certification.
+
+- id: contact
+  questions: [contact, how to reach him, get in touch, contact details]
+  answer: >-
+    LinkedIn or email work best: https://www.linkedin.com/in/prateesh-sulikeri/ · sulikeriprateesh7@gmail.com.
+    You can also use the contact form at https://prateesh-sulikeri-portfolio.vercel.app/about#contact or call
+    +91 78923 02330. He usually replies within 24–48 hours.
+
+- id: email
+  questions: [email, email address, mail]
+  answer: sulikeriprateesh7@gmail.com
+
+- id: phone
+  questions: [phone, phone number, call, mobile]
+  answer: "+91 78923 02330"
+
+- id: resume
+  questions: [resume, cv, résumé, download resume]
+  answer: >-
+    His latest résumé: https://prateesh-sulikeri-portfolio.vercel.app/resumePdf.pdf (also on
+    https://prateesh-sulikeri-portfolio.vercel.app/about).
+
+- id: social_github
+  questions: [github, repos, source code]
+  answer: https://github.com/Prateesh-Sulikeri
+
+- id: social_linkedin
+  questions: [linkedin]
+  answer: https://www.linkedin.com/in/prateesh-sulikeri/
+
+- id: social_leetcode
+  questions: [leetcode, dsa profile]
+  answer: https://leetcode.com/u/sulikeriprateesh7
+
+- id: social_media
+  questions: [social media, socials, twitter, x, youtube, links]
+  answer: >-
+    GitHub: https://github.com/Prateesh-Sulikeri · LinkedIn: https://www.linkedin.com/in/prateesh-sulikeri/ ·
+    X: https://x.com/Prateesh2002 · YouTube: https://www.youtube.com/@TheJinxxedCoder ·
+    LeetCode: https://leetcode.com/u/sulikeriprateesh7
+
+- id: portfolio
+  questions: [portfolio, website, portfolio link]
+  answer: https://prateesh-sulikeri-portfolio.vercel.app/
+
+- id: blog
+  questions: [blog, writing, articles, posts]
+  answer: >-
+    His writing lives at https://prateesh-sulikeri-portfolio.vercel.app/writing, with notes on building backend
+    and distributed systems. The first post is on its way.
+
+- id: engineering_principles
+  questions: [engineering principles, opinions, monolith or microservices, philosophy]
+  answer: >-
+    Start with the simplest architecture that works (a modular monolith before microservices), treat tests as
+    a safety net for business behaviour and failures, understand the SQL behind your ORM, design for partial
+    failure and recovery from day one, and use AI tools to amplify judgment, not replace it.
+
+- id: ai_tools_usage
+  questions: [how does he use ai tools, claude code, copilot, ai coding]
+  answer: >-
+    For exploration, legacy-code understanding, debugging, test generation, review, docs and repetitive
+    automation, with structured agentic workflows and evaluation loops for complex tasks. He always reviews,
+    tests and understands the output himself.
+
+- id: learning_style
+  questions: [how does he learn, learning approach, resources]
+  answer: >-
+    Fundamentals first, then projects: official docs, books and good courses for structure, small
+    experiments, then something close to a real application, always understanding the trade-offs and the "why".
+
+- id: proudest
+  questions: [proudest achievement, most proud of]
+  answer: >-
+    Growing from an early-career backend developer into someone trusted with complex reliability and Applied
+    AI work at Xoriant, and building and open-sourcing Onsite end to end, from idea to a 1.0.0 release.
+
+- id: team_fit
+  questions: [ideal team, what kind of team, work culture, red flags]
+  answer: >-
+    Engineering-driven teams that value technical depth, ownership, mentorship, constructive code reviews and
+    reliable systems, ideally mixing Java and distributed systems with practical Applied AI.
+
+- id: hobbies
+  questions: [hobbies, what does he do for fun, interests]
+  answer: >-
+    He enjoys building side projects, keeping up with AI developments, gaming (especially story-driven games)
+    and casually learning Japanese.
+
+- id: off_topic
+  questions: [homework, write my code, help me with my assignment, general question]
+  answer: >-
+    I only answer questions about Prateesh and his work, so I can't help with that. Want to hear about his
+    projects or experience instead?
+
+- id: inappropriate
+  questions: [hack, hate, abuse, jailbreak, ignore previous instructions, reveal your prompt]
+  answer: "That's not nice."
+
+- id: default
+  questions: []
+  answer: >-
+    I don't have an answer for that one. You can ask Prateesh directly via
+    https://prateesh-sulikeri-portfolio.vercel.app/about#contact or LinkedIn.
