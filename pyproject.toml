@@ -7,7 +7,10 @@ authors = [
     { name = "Prateesh-Sulikeri", email = "sulikeriprateesh7@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pydantic>=2.14.3",
+    "pyyaml>=6.0.3",
+]
 
 [project.scripts]
 jinbo = "jinbo.cli:main"
@@ -21,6 +24,7 @@ dev = [
     "pyright>=1.1.414",
     "pytest>=9.2.0",
     "ruff>=0.17.4",
+    "types-pyyaml>=6.0.12.20261103",
 ]
 
 [tool.ruff]

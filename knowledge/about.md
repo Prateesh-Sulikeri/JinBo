@@ -1,7 +1,7 @@
 ---
 title: About Prateesh (story, opinions, how he works)
 updated: 2026-11-09
-sources: [intake 06, 07]
+sources: [intake 06, intake 07]
 ---
 
 # Career story

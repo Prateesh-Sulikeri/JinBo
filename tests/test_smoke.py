@@ -9,5 +9,7 @@ def test_version_is_set() -> None:
 
 
 def test_cli_prints_version(capsys: pytest.CaptureFixture[str]) -> None:
-    main()
+    with pytest.raises(SystemExit) as exc:
+        main(["--version"])
+    assert exc.value.code == 0
     assert capsys.readouterr().out.strip() == f"jinbo {jinbo.__version__}"
